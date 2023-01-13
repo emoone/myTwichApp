@@ -6,7 +6,7 @@ module.exports = {
   semi: true,
 
 // 들여쓰기 2칸
-  tabWidth: 4,
+  tabWidth: 2,
   
   // 배열 키: 값 뒤에 항상 콤마를 붙이도록 formatting
   trailingComma: 'all',
@@ -18,6 +18,9 @@ module.exports = {
   arrowParens: 'avoid',
 
   // windows에 뜨는 'Delete cr' 에러 해결
-  endOfLine: 'auto'
+  endOfLine: 'auto',
+
+  // 뭔지 알아야 함
+  jsxBracketSameLine: true,
 
 }
