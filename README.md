@@ -5,14 +5,16 @@ Twich API를 이용한 페이지 구현
 ## TODO LIST
 
 - API 통신 구현 (typeScript Class)
+  - api manager 구현
+- Data Parsing(Redux, Reducer, Recoil ..) 등 방식
 - 동영상 리스트 페이지
 - Dynamic Search
 - 인피니티 스크롤
 - 버마?? (CSS)
-- AirBnb (ESLint)
-- 환경변수 (env, 기본룰)
-- prettier
-- git ignor 세팅
+- ~~AirBnb (ESLint)~~
+- ~~환경변수 (env, 기본룰)~~
+- ~~prettier~~
+- ~~git ignor 세팅~~
 
 ### `yarn start`
 
