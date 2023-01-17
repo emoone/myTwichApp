@@ -5,7 +5,7 @@ Twich API를 이용한 페이지 구현
 ## TODO LIST
 
 - API 통신 구현 (typeScript Class)
-  - api manager 구현
+  - axios config 설정 feat(typescript)
 - Data Parsing(Redux, Reducer, Recoil ..) 등 방식
 - 동영상 리스트 페이지
 - Dynamic Search

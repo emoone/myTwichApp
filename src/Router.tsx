@@ -8,7 +8,7 @@ function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomeComponent />} />
-        <Route path="/" element={<TwichComponent />} />
+        <Route path="/twich" element={<TwichComponent />} />
       </Routes>
     </BrowserRouter>
   );

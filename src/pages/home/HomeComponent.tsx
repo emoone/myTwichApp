@@ -1,17 +1,18 @@
-import { getAuthoToken } from '../../api/apiHeader';
+import { twichAuth } from '../../api';
 
 const HomeComponent = () => {
   return (
     <div>
-      The HOMEasdfasdfasdfa
+      The HOME asdfasdfasdfa
       <div className="parent" style={{}}>
         parent
         <div>children1</div>
         <div>children2</div>
       </div>
-      <button type="button" onClick={() => getAuthoToken()}>
-        getGamesList
+      <button type="button" onClick={() => twichAuth()}>
+        getTopGames
       </button>
+      {}
     </div>
   );
 };
