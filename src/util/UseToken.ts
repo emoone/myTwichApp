@@ -1,11 +1,11 @@
-import { twichAuth } from '../api';
+import { twitchAuth } from '../api';
 
 class useToken {
   // accessToken 정보 받기 및 세팅 하기
   static getAccessToken = async () => {
     let token = localStorage.getItem('token');
     if (!token) {
-      const data = await twichAuth();
+      const data = await twitchAuth();
       if (data) {
         token = data ? data.access_token : null;
         this.setAccessToken(token ?? '');

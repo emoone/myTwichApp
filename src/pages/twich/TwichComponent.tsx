@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import fetchTwichTopGameList from '../../api/twichTopGameList';
+import fetchTwichTopGameList from '../../api/fetchTwitchTopGameList';
 import { Loading } from '../../components/loading';
 
 interface DataPropTypes {

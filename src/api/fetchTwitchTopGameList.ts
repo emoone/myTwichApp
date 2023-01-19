@@ -7,7 +7,7 @@ const TWICH_BASE_URL = 'https://api.twitch.tv';
  * promises 큐화 시키기 (순차적으로 호출)
  * @returns
  */
-const fetchTwichTopGameList = async () => {
+const fetchTwitchTopGameList = async () => {
   try {
     const { token } = await useToken.getAccessToken();
 
@@ -17,7 +17,7 @@ const fetchTwichTopGameList = async () => {
       `${TWICH_BASE_URL}/helix/games/top`,
       {
         headers: {
-          'client-id': process.env.REACT_APP_TWICH_CLIENT_ID,
+          'client-id': process.env.REACT_APP_TWITCH_CLIENT_ID,
           Authorization: `Bearer ${token}`,
         },
       },
@@ -28,4 +28,4 @@ const fetchTwichTopGameList = async () => {
   }
 };
 
-export default fetchTwichTopGameList;
+export default fetchTwitchTopGameList;

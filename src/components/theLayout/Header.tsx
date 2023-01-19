@@ -32,7 +32,7 @@ const Header = () => {
     { name: 'twitter', link: '', iconName: ['fab', 'twitter'] },
   ];
   return (
-    <header className="header">
+    <header className="header" style={{ position: 'sticky', top: 0 }}>
       <nav id="navbar" className="bd-navbar navbar is-flex">
         {/* logo, gnbMenu, icons */}
         {/* logo */}
@@ -48,7 +48,7 @@ const Header = () => {
 
         {/* gnbMenu  */}
         <div className="navbarMenu is-flex is-full-widescreen">
-          {gnbArr.map((item, index) => {
+          {gnbArr.map(item => {
             return (
               <a
                 key={`${item.name}`}
@@ -63,7 +63,7 @@ const Header = () => {
 
         {/* inbMenu */}
         <div className={cn('is-flex')}>
-          {inbArr.map((item, index) => {
+          {inbArr.map(item => {
             return (
               <a
                 key={item.name}
