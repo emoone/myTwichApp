@@ -1,21 +1,22 @@
 import { twichAuth } from '../api';
 
-const UseToken = () => {
-  const getAccessToken = () => {
-    const token = localStorage.getItem('token');
+class useToken {
+  // accessToken 정보 받기 및 세팅 하기
+  static getAccessToken = async () => {
+    let token = localStorage.getItem('token');
     if (!token) {
-      twichAuth();
+      const data = await twichAuth();
+      if (data) {
+        token = data ? data.access_token : null;
+        this.setAccessToken(token ?? '');
+      }
     }
-    return token;
+    return { token };
   };
 
-  const setAccessToken = (accessToken: string) => {
-    return localStorage.setItem('token', accessToken);
+  // accessToken 정보 셋
+  static setAccessToken = (accessToken: string) => {
+    localStorage.setItem('token', accessToken);
   };
-
-  return {
-    getAccessToken,
-    setAccessToken,
-  };
-};
-export default UseToken;
+}
+export default useToken;

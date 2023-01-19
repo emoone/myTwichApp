@@ -1,27 +1,31 @@
-import { useQuery } from '@tanstack/react-query';
-import { UseToken } from '../util';
 import { apiInstance } from './apiManager';
+import { useToken } from '../util';
 
 const TWICH_BASE_URL = 'https://api.twitch.tv';
 
+/**
+ * promises 큐화 시키기 (순차적으로 호출)
+ * @returns
+ */
 const fetchTwichTopGameList = async () => {
-  const { getAccessToken } = UseToken();
+  try {
+    const { token } = await useToken.getAccessToken();
 
-  await apiInstance
-    .get(`${TWICH_BASE_URL}/helix/games/top`, {
-      headers: {
-        'client-id': process.env.REACT_APP_TWICH_CLIENT_ID,
-        Authorization: `Bearer ${getAccessToken()}`,
+    if (!token) throw new Error('no Token');
+
+    const { data } = await apiInstance.get(
+      `${TWICH_BASE_URL}/helix/games/top`,
+      {
+        headers: {
+          'client-id': process.env.REACT_APP_TWICH_CLIENT_ID,
+          Authorization: `Bearer ${token}`,
+        },
       },
-    })
-    .then(({ data }) => {
-      // console.log('gameList is', data);
-      return data;
-    })
-    .catch(error => {
-      console.log('error is', error);
-      return error;
-    });
+    );
+    return data;
+  } catch (e) {
+    return e;
+  }
 };
 
 export default fetchTwichTopGameList;

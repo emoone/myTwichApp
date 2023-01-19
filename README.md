@@ -10,7 +10,7 @@ Twich API를 이용한 페이지 구현
 - 동영상 리스트 페이지
 - Dynamic Search
 - 인피니티 스크롤
-- 버마?? (CSS)
+- bulma libraly 사용해보기 (CSS)
 - ~~AirBnb (ESLint)~~
 - ~~환경변수 (env, 기본룰)~~
 - ~~prettier~~

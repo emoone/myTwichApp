@@ -1,13 +1,6 @@
-import React, { useEffect } from 'react';
-import {
-  QueryClient,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import fetchTwichTopGameList from '../../api/twichTopGameList';
-import { apiInstance } from '../../api';
-import { UseToken } from '../../util';
+import { Loading } from '../../components/loading';
 
 interface DataPropTypes {
   id: string;
@@ -17,47 +10,49 @@ interface DataPropTypes {
 }
 
 const TwichComponent = () => {
-  const { getAccessToken } = UseToken();
-  const TWICH_BASE_URL = 'https://api.twitch.tv';
-  const { isLoading, error, data, isFetching } = useQuery(
+  const { isLoading, error, isError, data } = useQuery(
     ['topGames'],
-    async () => {
-      const testData = await apiInstance
-        .get(`${TWICH_BASE_URL}/helix/games/top`, {
-          headers: {
-            'client-id': process.env.REACT_APP_TWICH_CLIENT_ID,
-            Authorization: `Bearer ${getAccessToken()}`,
-          },
-        })
-        .then(res => {
-          return res.data.data;
-        });
-
-      return testData;
-    },
+    fetchTwichTopGameList,
+    { refetchOnWindowFocus: false }, // Default: true, 유저가 app을 떠났다가 돌아올(포커스) 시 자동호출 방지;
   );
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{`An error has: ${error}`}</div>;
+  if (isLoading) return <Loading />;
+  if (isError) return <div>{`An error has: ${error}`}</div>;
 
-  // useEffect(() => {
-  //   if (!data) return;
-  // }, []);
-  console.log(data);
+  /**
+   * 페이지 클릭 시 api 호출 막기
+   * CustomHook으로 분리해 보기
+   *
+   */
 
   return (
-    <section>
-      Twitch Area
-      {data.map((item: DataPropTypes, index: number) => {
-        return (
-          <div key={item.id}>
-            <span>{item.id}</span>
-            <span>{item.name}</span>
-            <span>{item.igdb_id}</span>
-            <img src={item.box_art_url} alt="" />
-          </div>
-        );
-      })}
+    <section className="container mt-3">
+      <h1 className="title has-text-white	mb-4">Twitch TopGamesList</h1>
+      <div className="columns is-multiline m-auto">
+        {data.data.map((item: DataPropTypes) => {
+          return (
+            <div key={item.id} className="column is-one-quarter">
+              {/* thumbArea */}
+              <div className="thumInfo image is-200x300">
+                <img
+                  src={item.box_art_url
+                    .replace('{width}', '200')
+                    .replace('{height}', '300')}
+                  alt=""
+                />
+              </div>
+              {/* thumbArea */}
+              {/* otherInfo */}
+              <div className="infoArea is-flex is-flex-direction-column mt-1">
+                <span>{item.id}</span>
+                <span>{item.name}</span>
+                <span>{item.igdb_id}</span>
+              </div>
+              {/* otherInfo */}
+            </div>
+          );
+        })}
+      </div>
     </section>
   );
 };

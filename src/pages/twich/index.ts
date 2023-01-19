@@ -1,3 +1,1 @@
-import TwichComponent from './TwichComponent';
-
-export { TwichComponent };
+export { default as TwichComponent } from './TwichComponent';

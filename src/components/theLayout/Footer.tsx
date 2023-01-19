@@ -1,4 +1,4 @@
 const Footer = () => {
-  return <div>HEADER AREA</div>;
+  return <div>FOOTER AREA</div>;
 };
 export default Footer;

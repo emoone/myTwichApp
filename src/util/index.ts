@@ -1,3 +1,1 @@
-import UseToken from './UseToken';
-
-export { UseToken };
+export { default as useToken } from './useToken';
