@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import fetchTwichTopGameList from '../../api/fetchTwitchTopGameList';
 import { Loading } from '../../components/loading';
+import { fetchTwitchTopGameList } from '../../api/fetchTwitchTopGameList';
 
 interface DataPropTypes {
   id: string;
@@ -12,7 +12,7 @@ interface DataPropTypes {
 const TwichComponent = () => {
   const { isLoading, error, isError, data } = useQuery(
     ['topGames'],
-    fetchTwichTopGameList,
+    fetchTwitchTopGameList,
     { refetchOnWindowFocus: false }, // Default: true, 유저가 app을 떠났다가 돌아올(포커스) 시 자동호출 방지;
   );
 

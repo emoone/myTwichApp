@@ -1,4 +1,4 @@
-import { twitchAuth } from '../api';
+import { twitchAuth } from '../api/twitchAuth';
 
 class useToken {
   // accessToken 정보 받기 및 세팅 하기

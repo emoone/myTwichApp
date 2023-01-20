@@ -7,7 +7,7 @@ const TWICH_BASE_URL = 'https://api.twitch.tv';
  * promises 큐화 시키기 (순차적으로 호출)
  * @returns
  */
-const fetchTwitchTopGameList = async () => {
+export const fetchTwitchTopGameList = async () => {
   try {
     const { token } = await useToken.getAccessToken();
 
@@ -27,5 +27,3 @@ const fetchTwitchTopGameList = async () => {
     return e;
   }
 };
-
-export default fetchTwitchTopGameList;
