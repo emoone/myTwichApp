@@ -80,7 +80,6 @@ const TwichComponent = () => {
   }, []);
 
   console.log('has nextpage ', hasNextPage);
-  const [] = testHook();
 
   if (isLoading) return <Loading />;
   if (isError) return <div>{`An error has: ${error}`}</div>;
