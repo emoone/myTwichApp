@@ -32,7 +32,7 @@ const Header = () => {
     { name: 'twitter', link: '', iconName: ['fab', 'twitter'] },
   ];
   return (
-    <header className="header" style={{ position: 'sticky', top: 0 }}>
+    <header className="header z-[1]" style={{ position: 'sticky', top: 0 }}>
       <nav id="navbar" className="bd-navbar navbar is-flex">
         {/* logo, gnbMenu, icons */}
         {/* logo */}

@@ -18,7 +18,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "react-hooks"],
+  "plugins": ["react", "@typescript-eslint", "react-hooks", "node"],
   "settings": {
     "typescript": {},
     "import/resolver": {
@@ -33,6 +33,15 @@
   "rules": {
     "import/prefer-default-export": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
+
+    // any에 대한 경고 비활성
+    "@typescript-eslint/no-explicit-any": "off",
+
+    // require에 대한 경고 비활성
+    "node/global-require": "off",
+
+    // console 사용에 대한 경고 조건
+    "no-console": "off",
 
     // 운영체제 마다 개행 차이로 생기는 오류
     "linebreak-style": 0,
