@@ -37,6 +37,9 @@
     // any에 대한 경고 비활성
     "@typescript-eslint/no-explicit-any": "off",
 
+    // noShadow 비활성
+    "no-shadow": "off",
+
     // require에 대한 경고 비활성
     "node/global-require": "off",
 

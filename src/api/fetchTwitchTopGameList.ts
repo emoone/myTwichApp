@@ -9,10 +9,10 @@ const TWICH_BASE_URL = 'https://api.twitch.tv';
  */
 export const fetchTwitchTopGameList = async ({
   pagination,
-  first = 20,
+  limit = 20,
 }: {
   pagination: string;
-  first?: number;
+  limit?: number;
 }) => {
   try {
     const { token } = await useToken.getAccessToken();
@@ -22,14 +22,13 @@ export const fetchTwitchTopGameList = async ({
     const { data } = await apiInstance.get(
       `${TWICH_BASE_URL}/helix/games/top`,
       {
-        params: { after: pagination, first },
+        params: { after: pagination, first: limit },
         headers: {
           'client-id': process.env.REACT_APP_TWITCH_CLIENT_ID,
           Authorization: `Bearer ${token}`,
         },
       },
     );
-    console.log(data);
     return data;
   } catch (e) {
     return e;
