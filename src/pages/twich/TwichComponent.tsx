@@ -1,7 +1,8 @@
-import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useEffect, useRef, useState } from 'react';
 import { Loading } from '../../components/loading';
 import { fetchTwitchTopGameList } from '../../api/fetchTwitchTopGameList';
+import { useIntersectionObserver } from '../../hook';
 
 interface DataItemPropTypes {
   id: string;
@@ -22,6 +23,7 @@ interface DataPropTypes {
  *
  */
 const TwichComponent = () => {
+  const observeTarget = useRef(null);
   const [pagination, setPagination] = useState('');
   const [gameList, setGameList] = useState<DataItemPropTypes[]>([]);
 
@@ -64,22 +66,37 @@ const TwichComponent = () => {
   );
   // useInfiniteQuery
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const { scrollTop, offsetHeight } = document.documentElement;
-      const total = scrollTop + window.innerHeight;
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const { scrollTop, offsetHeight } = document.documentElement;
+  //     const total = scrollTop + window.innerHeight;
 
-      if (total >= offsetHeight && hasNextPage) {
-        fetchNextPage();
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
+  //     if (total >= offsetHeight && hasNextPage) {
+  //       fetchNextPage();
+  //     }
+  //   };
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, []);
+  const [observe, unobserve] = useIntersectionObserver({
+    callback: () => {
+      console.log(fetchNextPage());
+      fetchNextPage();
+    },
+  });
+  useEffect(() => {
+    if (hasNextPage) observe(observeTarget.current);
+
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      if (observeTarget.current) {
+        unobserve(observeTarget.current);
+      }
     };
   }, []);
 
-  console.log('has nextpage ', hasNextPage);
+  console.log('has nextpage ', hasNextPage, observeTarget);
 
   if (isLoading) return <Loading />;
   if (isError) return <div>{`An error has: ${error}`}</div>;
@@ -94,7 +111,7 @@ const TwichComponent = () => {
               return (
                 <div key={c.id} className="column is-one-quarter">
                   {/* thumbArea */}
-                  <div className="thumInfo image is-200x300">
+                  <div className="thumInfo image aspect-[200/300]">
                     <img
                       src={c.box_art_url
                         .replace('{width}', '200')
@@ -115,15 +132,11 @@ const TwichComponent = () => {
             });
           })}
 
-          <button
-            style={{ position: 'fixed', left: '5%' }}
-            type="button"
-            onClick={() => {
-              // console.log('과연', data.pagination.cursor);
-              // setPagination(data.pagination.cursor);
-            }}>
-            ADD
-          </button>
+          <div
+            ref={observeTarget}
+            id="observeTarget"
+            className="w-full h-[30px] bg-red-400"
+          />
         </div>
       </div>
     </section>
