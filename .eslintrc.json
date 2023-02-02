@@ -37,6 +37,8 @@
     // any에 대한 경고 비활성
     "@typescript-eslint/no-explicit-any": "off",
 
+    "consistent-return": "off",
+
     // noShadow 비활성
     "no-shadow": "off",
 

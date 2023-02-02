@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Loading } from '../../components/loading';
 import { fetchTwitchTopGameList } from '../../api/fetchTwitchTopGameList';
 import { useIntersectionObserver } from '../../hook';
@@ -23,24 +23,6 @@ interface DataPropTypes {
  *
  */
 const TwichComponent = () => {
-  const observeTarget = useRef(null);
-  const [pagination, setPagination] = useState('');
-  const [gameList, setGameList] = useState<DataItemPropTypes[]>([]);
-
-  // useQuery
-  // const { isLoading, error, isError, data } = useQuery(
-  //   ['topGames', pagination],
-  //   () => fetchTwitchTopGameList({ pagination, count: 20 }),
-
-  //   {
-  //     keepPreviousData: false,
-  //     refetchOnWindowFocus: false,
-  //   }, // Default: true, 유저가 app을 떠났다가 돌아올(포커스) 시 자동호출 방지;
-  // );
-  // console.log('gamelist1', gameList);
-  // useQuery
-
-  // useInfiniteQuery
   const {
     data,
     status,
@@ -58,45 +40,28 @@ const TwichComponent = () => {
     },
     {
       getNextPageParam: (lastPage, allPages) => {
-        console.log('lastPage is', lastPage);
         const pagination = lastPage.pagination.cursor;
         return pagination || undefined;
       },
     },
   );
-  // useInfiniteQuery
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const { scrollTop, offsetHeight } = document.documentElement;
-  //     const total = scrollTop + window.innerHeight;
-
-  //     if (total >= offsetHeight && hasNextPage) {
-  //       fetchNextPage();
-  //     }
-  //   };
-  //   window.addEventListener('scroll', handleScroll);
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, []);
-  const [observe, unobserve] = useIntersectionObserver({
-    callback: () => {
-      console.log(fetchNextPage());
-      fetchNextPage();
-    },
+  const [setTarget] = useIntersectionObserver({
+    handleIntersect: useCallback(
+      ([
+        {
+          isIntersecting, // 관찰 대상의 교차 상태(Boolean)
+        },
+      ]) => {
+        if (isIntersecting) {
+          console.log('isIntersecting is', isIntersecting);
+          fetchNextPage();
+        }
+      },
+      [],
+    ),
   });
-  useEffect(() => {
-    if (hasNextPage) observe(observeTarget.current);
-
-    return () => {
-      if (observeTarget.current) {
-        unobserve(observeTarget.current);
-      }
-    };
-  }, []);
-
-  console.log('has nextpage ', hasNextPage, observeTarget);
+  // useInfiniteQuery
 
   if (isLoading) return <Loading />;
   if (isError) return <div>{`An error has: ${error}`}</div>;
@@ -133,7 +98,7 @@ const TwichComponent = () => {
           })}
 
           <div
-            ref={observeTarget}
+            ref={setTarget}
             id="observeTarget"
             className="w-full h-[30px] bg-red-400"
           />

@@ -16,10 +16,8 @@ module.exports = {
 
     extend: {
       colors: {
-        primary: '#C4C4C4',
-        colorBlack: '#000',
-        colorWhite: '#fff',
-        mainColorRed: '#F02D37',
+        light:{},
+        dark: {},
       },
 
       gridTemplateColumns: {
