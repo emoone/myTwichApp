@@ -4,7 +4,6 @@ interface PropTypes {
   threshold?: number;
   root?: any;
   rootMargin?: string;
-  isMounted?: boolean;
   targetRef: RefObject<any>;
 }
 
@@ -23,7 +22,7 @@ interface PropTypes {
  */
 const useIntersectionObserver = (callback: () => void, props: PropTypes) => {
   const { threshold = 0, root = null, rootMargin = '0%', targetRef } = props;
-  // const [target, setTarget] = useState<HTMLElement | null | undefined>(null);
+
   useEffect(() => {
     if (!targetRef.current) return;
 
@@ -55,7 +54,7 @@ const useIntersectionObserver = (callback: () => void, props: PropTypes) => {
     return () => {
       observer.unobserve(targetRef.current);
     };
-  }, [targetRef, threshold, root, rootMargin, callback]);
+  }, [targetRef, callback]);
 };
 
 export default useIntersectionObserver;

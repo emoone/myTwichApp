@@ -51,12 +51,12 @@ const TwichComponent = () => {
 
   // useIntersectionObserver
   // TODO: fetchNextPage 함수 두번 호출 문제 해결 필요.
-  useIntersectionObserver(
-    () => {
-      fetchNextPage();
-    },
-    { targetRef },
-  );
+
+  const nextPageCallback = useCallback(() => {
+    if (!hasNextPage) return;
+    fetchNextPage();
+  }, [fetchNextPage, hasNextPage]);
+  useIntersectionObserver(nextPageCallback, { targetRef });
   // useIntersectionObserver
 
   if (isLoading) return <Loading />;
