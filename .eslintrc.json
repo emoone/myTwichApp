@@ -34,8 +34,14 @@
     "import/prefer-default-export": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
 
+    // 주석옵션
+    "spaced-comment": ["error", "always", { "markers": ["/"] }],
+
     // any에 대한 경고 비활성
     "@typescript-eslint/no-explicit-any": "off",
+
+    // 객체 리터럴에 대한 메서드 및 속성 단축 구문 요구 또는 허용 안 함
+    "object-shorthand": ["error", "always", { "avoidQuotes": true }],
 
     "consistent-return": "off",
 

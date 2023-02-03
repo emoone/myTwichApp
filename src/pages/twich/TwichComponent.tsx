@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { Loading } from '../../components/loading';
 import { fetchTwitchTopGameList } from '../../api/fetchTwitchTopGameList';
 import { useIntersectionObserver } from '../../hook';
@@ -23,6 +23,8 @@ interface DataPropTypes {
  *
  */
 const TwichComponent = () => {
+  const targetRef = useRef<HTMLDivElement>(null);
+
   const {
     data,
     status,
@@ -45,23 +47,17 @@ const TwichComponent = () => {
       },
     },
   );
-
-  const [setTarget] = useIntersectionObserver({
-    handleIntersect: useCallback(
-      ([
-        {
-          isIntersecting, // 관찰 대상의 교차 상태(Boolean)
-        },
-      ]) => {
-        if (isIntersecting) {
-          console.log('isIntersecting is', isIntersecting);
-          fetchNextPage();
-        }
-      },
-      [],
-    ),
-  });
   // useInfiniteQuery
+
+  // useIntersectionObserver
+  // TODO: fetchNextPage 함수 두번 호출 문제 해결 필요.
+  useIntersectionObserver(
+    () => {
+      fetchNextPage();
+    },
+    { targetRef },
+  );
+  // useIntersectionObserver
 
   if (isLoading) return <Loading />;
   if (isError) return <div>{`An error has: ${error}`}</div>;
@@ -97,11 +93,7 @@ const TwichComponent = () => {
             });
           })}
 
-          <div
-            ref={setTarget}
-            id="observeTarget"
-            className="w-full h-[30px] bg-red-400"
-          />
+          <div ref={targetRef} id="observeTarget" />
         </div>
       </div>
     </section>
