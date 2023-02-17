@@ -15,8 +15,8 @@ const Header = () => {
       link: '/',
     },
     {
-      name: 'twich',
-      link: '/twich',
+      name: 'twitch',
+      link: '/twitch',
     },
     {
       name: 'other',

@@ -11,8 +11,8 @@ function Router() {
       <Routes>
         <Route element={<TheLayOut />}>
           <Route path="/" element={<HomeComponent />} />
-          <Route path="/twich" element={<TwichComponent />} />
-          <Route path="/twich/:id" element={<TwGamesComponent />} />
+          <Route path="/twitch" element={<TwichComponent />} />
+          <Route path="/twitch/:id" element={<TwGamesComponent />} />
         </Route>
       </Routes>
     </BrowserRouter>

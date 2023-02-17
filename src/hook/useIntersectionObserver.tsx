@@ -52,7 +52,8 @@ const useIntersectionObserver = (callback: () => void, props: PropTypes) => {
     observer.observe(targetRef.current);
 
     return () => {
-      observer.unobserve(targetRef.current);
+      // observer.unobserve(targetRef.current);
+      observer.disconnect();
     };
   }, [targetRef, callback]);
 };

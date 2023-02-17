@@ -1,5 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Loading } from '../../components/loading';
 import { fetchTwitchTopGameList } from '../../api/fetchTwitchTopGameList';
 import { useIntersectionObserver } from '../../hook';
@@ -71,23 +72,25 @@ const TwichComponent = () => {
             return item.data.map((c, index) => {
               return (
                 <div key={c.id} className="column is-one-quarter">
-                  {/* thumbArea */}
-                  <div className="thumInfo image aspect-[200/300]">
-                    <img
-                      src={c.box_art_url
-                        .replace('{width}', '200')
-                        .replace('{height}', '300')}
-                      alt=""
-                    />
-                  </div>
-                  {/* thumbArea */}
-                  {/* otherInfo */}
-                  <div className="infoArea is-flex is-flex-direction-column mt-1">
-                    <span>{c.id}</span>
-                    <span>{c.name}</span>
-                    <span>{c.igdb_id}</span>
-                  </div>
-                  {/* otherInfo */}
+                  <Link to={`/twitch/${c.name}`}>
+                    {/* thumbArea */}
+                    <div className="thumInfo image aspect-[200/300]">
+                      <img
+                        src={c.box_art_url
+                          .replace('{width}', '200')
+                          .replace('{height}', '300')}
+                        alt=""
+                      />
+                    </div>
+                    {/* thumbArea */}
+                    {/* otherInfo */}
+                    <div className="infoArea is-flex is-flex-direction-column mt-1">
+                      <span>{c.id}</span>
+                      <span>{c.name}</span>
+                      <span>{c.igdb_id}</span>
+                    </div>
+                    {/* otherInfo */}
+                  </Link>
                 </div>
               );
             });
