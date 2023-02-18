@@ -1,15 +1,15 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
-import getTwitchDetailData from '../../api/getTwitchDetailData';
-import { TwGameItemType } from './twGameVM';
+import { TwStreamItemType } from './twStreamVM';
+import apiTwStreams from '../../api/apiTwitch';
 
-const TwGamesComponent = () => {
+const TwStreamMain = () => {
   const [isMount, setIsMount] = useState(false);
-  const [testData, setTestData] = useState<TwGameItemType[]>([]);
+  const [testData, setTestData] = useState<TwStreamItemType[]>([]);
   const param = useParams();
   useEffect(() => {
-    const getGamesData = getTwitchDetailData(param.id!);
+    const getGamesData = apiTwStreams();
 
     const text = async () => {
       await getGamesData
@@ -17,8 +17,8 @@ const TwGamesComponent = () => {
           const { data } = res;
           const resultItemList = _.transform(
             data,
-            (result: TwGameItemType[], c) => {
-              const gameItem: TwGameItemType = {
+            (result: TwStreamItemType[], c) => {
+              const gameItem: TwStreamItemType = {
                 id: c.game_id,
                 userId: c.user_id,
                 userLogin: c.user_login,
@@ -65,4 +65,4 @@ const TwGamesComponent = () => {
     </div>
   );
 };
-export default TwGamesComponent;
+export default TwStreamMain;

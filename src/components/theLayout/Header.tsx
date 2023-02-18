@@ -3,8 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp, library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import cn from 'clsx';
-import { fetchTwitchTopGameList } from '../../api/fetchTwitchTopGameList';
-import getTwitchItems from '../../api/getTwitchItems';
 
 library.add(fab);
 
@@ -19,8 +17,8 @@ const Header = () => {
       link: '/twitch',
     },
     {
-      name: 'other',
-      link: '/other',
+      name: 'stream',
+      link: '/stream',
     },
   ];
   interface InbArrPropTypes {
@@ -35,16 +33,7 @@ const Header = () => {
   ];
 
   const onSearch = () => {
-    const baseUrl = 'https://picsum.photos/v2/list?page=1&limit=100';
-
-    console.log('searchStart');
-    getTwitchItems(baseUrl, { answer: 42 })
-      .then(data => {
-        console.log('data is', data); // JSON 데이터가 `data.json()` 호출에 의해 파싱됨
-      })
-      .catch((error: any) => {
-        console.error(error);
-      });
+    console.log('onSearch Start');
   };
 
   return (

@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { HomeComponent } from './pages/home';
-import { TwichComponent } from './pages/twich';
+import { TwTopGameMain } from './pages/twTopGame';
 import TheLayOut from './components/theLayout/TheLayout';
-import { TwGamesComponent } from './pages/twGamesPage';
+import { TwStreamMain } from './pages/twStream';
+import { TwDetailMain } from './pages/twDetail';
 
 function Router() {
   return (
@@ -11,8 +12,10 @@ function Router() {
       <Routes>
         <Route element={<TheLayOut />}>
           <Route path="/" element={<HomeComponent />} />
-          <Route path="/twitch" element={<TwichComponent />} />
-          <Route path="/twitch/:id" element={<TwGamesComponent />} />
+          <Route path="/twitch" element={<TwTopGameMain />} />
+          <Route path="/twitch/:id" element={<TwStreamMain />} />
+          <Route path="/twitch/stream" element={<TwTopGameMain />} />
+          <Route path="/detail" element={<TwDetailMain />} />
         </Route>
       </Routes>
     </BrowserRouter>

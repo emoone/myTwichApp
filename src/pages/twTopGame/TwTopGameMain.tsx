@@ -1,8 +1,8 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Loading } from '../../components/loading';
-import { fetchTwitchTopGameList } from '../../api/fetchTwitchTopGameList';
+import { fetchTwitchTopGames } from '../../api/apiTwitch';
 import { useIntersectionObserver } from '../../hook';
 
 interface DataItemPropTypes {
@@ -23,7 +23,7 @@ interface DataPropTypes {
  * CustomHook으로 분리해 보기
  *
  */
-const TwichComponent = () => {
+const TwichTopGameMain = () => {
   const targetRef = useRef<HTMLDivElement>(null);
 
   const {
@@ -39,7 +39,7 @@ const TwichComponent = () => {
   } = useInfiniteQuery<DataPropTypes>(
     ['topGames'],
     ({ pageParam = '' }) => {
-      return fetchTwitchTopGameList({ pagination: pageParam });
+      return fetchTwitchTopGames({ pagination: pageParam });
     },
     {
       getNextPageParam: (lastPage, allPages) => {
@@ -102,4 +102,4 @@ const TwichComponent = () => {
     </section>
   );
 };
-export default TwichComponent;
+export default TwichTopGameMain;

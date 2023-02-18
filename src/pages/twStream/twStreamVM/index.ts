@@ -1,4 +1,4 @@
-export interface TwGameItemType {
+export interface TwStreamItemType {
   id: string;
   userId: string;
   userLogin: string;

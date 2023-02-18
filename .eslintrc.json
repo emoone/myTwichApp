@@ -5,13 +5,15 @@
     "node": true
   },
   "extends": [
-    "airbnb",
     "prettier",
+    "airbnb",
     "prettier/prettier",
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:prettier/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/eslint-recommended"
   ],
   "parserOptions": {
     "ecmaFeatures": { "jsx": true },
@@ -33,6 +35,9 @@
   "rules": {
     "import/prefer-default-export": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
+
+    "import/no-unresolved": [2, { "caseSensitive": false }],
+    // "import/no-unresolved": "off",
 
     // 주석옵션
     "spaced-comment": ["error", "always", { "markers": ["/"] }],
