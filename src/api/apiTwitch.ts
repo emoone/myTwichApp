@@ -91,7 +91,7 @@ const apiTwStreams = async () => {
 
     const getGamesData = response.json();
 
-    return getGamesData;
+    return request.json();
   } catch (e) {
     return e;
   }

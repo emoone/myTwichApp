@@ -11,7 +11,7 @@ const TwStreamMain = () => {
   useEffect(() => {
     const getGamesData = apiTwStreams();
 
-    const text = async () => {
+    const test = async () => {
       await getGamesData
         .then(res => {
           const { data } = res;
@@ -37,7 +37,7 @@ const TwStreamMain = () => {
           console.log(err);
         });
     };
-    text();
+    test();
   }, []);
 
   return (

@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import { all, fork } from 'redux-saga/effects';
 import counterReducer from './counterSlice';
+import { streamReducer } from './streams/reducer';
 
 // sagaMiddleware 연동
 const sagaMiddleware = createSagaMiddleware();
@@ -9,6 +10,7 @@ const sagaMiddleware = createSagaMiddleware();
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
+    streams: streamReducer,
   },
   middleware: [sagaMiddleware],
   devTools: true,

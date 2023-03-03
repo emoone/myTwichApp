@@ -6,3 +6,5 @@ export const streamReducer = {
     // reducer: (state: Draft<TwStreamItemType>) => {},
   },
 };
+
+export default streamReducer;
