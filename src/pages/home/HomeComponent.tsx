@@ -8,6 +8,7 @@ const HomeComponent = () => {
         <div>children2</div>
       </div>
       {}
+      {/* pokeMon/  */}
     </div>
   );
 };

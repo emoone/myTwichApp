@@ -5,6 +5,7 @@ import { TwTopGameMain } from './pages/twTopGame';
 import TheLayOut from './components/theLayout/TheLayout';
 import { TwStreamMain } from './pages/twStream';
 import { TwDetailMain } from './pages/twDetail';
+import { Pokemon } from './pages/pokemon';
 
 function Router() {
   return (
@@ -16,6 +17,7 @@ function Router() {
           <Route path="/twitch/:id" element={<TwStreamMain />} />
           <Route path="/twitch/stream" element={<TwTopGameMain />} />
           <Route path="/detail" element={<TwDetailMain />} />
+          <Route path="/pokemon" element={<Pokemon />} />
         </Route>
       </Routes>
     </BrowserRouter>

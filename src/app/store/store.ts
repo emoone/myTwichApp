@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import { all, fork } from 'redux-saga/effects';
 import counterReducer from './counterSlice';
-import { streamReducer } from './streams/reducer';
+import { pokemonApi } from './services/pokemon';
 
 // sagaMiddleware 연동
 const sagaMiddleware = createSagaMiddleware();
@@ -10,9 +10,10 @@ const sagaMiddleware = createSagaMiddleware();
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
-    streams: streamReducer,
+    [pokemonApi.reducerPath]: pokemonApi.reducer,
   },
-  middleware: [sagaMiddleware],
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(pokemonApi.middleware),
   devTools: true,
 });
 
