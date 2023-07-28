@@ -10,7 +10,7 @@ const Pokemon = () => {
   // code?: string;
   if (isError) {
     if (error) {
-      console.log(typeof error, error.status);
+      // console.log(typeof error, error.status);
     }
     return (
       <div className="errCon">
